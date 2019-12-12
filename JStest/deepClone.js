@@ -1,47 +1,48 @@
-function deepClone(data, uniqueList) {
-  if (!uniqueList) uniqueList = [];
-  switch (getType(data)) {
-    case "Array":
-      return data.map(item => {
-        return deepClone(item);
-      });
-    case "Object":
-      if (find(uniqueList, data)) {
-        return data;
-      } else {
-        uniqueList.push(data);
-        let obj = {};
-        Object.keys(data).forEach(key => {
-          obj[key] = deepClone(data[key], uniqueList);
-        });
-        return obj;
-      }
-
-    case "Date":
-      return new Date(data.valueOf());
-    default:
-      return data;
-  }
+// 深拷贝
+function deepClone(data, uniqueList = []) {
+  const toDoByType = {
+    Array: cloneArray,
+    Object: cloneObject,
+    Date: cloneDate
+  };
+  const type = getType(data);
+  return toDoByType[type] ? toDoByType[type](data, uniqueList) : data;
 }
+// 获取数据类型
 function getType(data) {
   return Object.prototype.toString.call(data).slice(8, -1);
 }
-function find(arr, item) {
-  let times = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === item && times >= 1) {
-      return true;
-    } else if (arr[i] === item && times === 0) {
-      times++;
-    }
+// 拷贝对象
+function cloneObject(data, uniqueList) {
+  if (uniqueList.indexOf(data) !== -1) {
+    return data;
+  } else {
+    uniqueList.push(data);
+    let obj = {};
+    Object.keys(data).forEach(key => {
+      obj[key] = deepClone(data[key], uniqueList);
+    });
+    return obj;
   }
-  return false;
 }
-
+// 拷贝数组
+function cloneArray(data) {
+  return data.map(item => {
+    return deepClone(item);
+  });
+}
+// 拷贝日期
+function cloneDate(data) {
+  return new Date(data.valueOf());
+}
+// 实验
 let obj = {
   a: 1,
   b: {
     c: 2
+  },
+  e: function() {
+    console.log(1234);
   }
 };
 // 假设obj.b的指针值为1，obj.b.d指针值也为1
