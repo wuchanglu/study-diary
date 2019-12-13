@@ -21,6 +21,7 @@
       </div>
       <div class="second__bottom"></div>
     </div>
+    <p class="hello__mix">mix</p>
   </div>
 </template>
 
@@ -61,5 +62,8 @@ ul li {
   }
   @include layout("first");
   @include layout(second);
+  &__mix{
+    color: $color-mix ;
+  }
 }
 </style>

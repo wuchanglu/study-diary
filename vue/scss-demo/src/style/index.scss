@@ -4,6 +4,7 @@ $color-success: #4fc48d;
 $color-warning: #f3d93f;
 $color-danger: #f6588e;
 $color-info: #27c6fa;
+$color-mix:mix($color-danger, $color-warning, $weight:70%);
 $base-path: "../assets/";
 $icon-logo: $base-path + "logo.png";
 $base-height: 80;
@@ -17,25 +18,25 @@ $base-height: 80;
 }
 @mixin layout($class) {
   &__#{$class} {
-    width: 500px;
+    width: 200px;
     .#{$class} {
       &__top {
         display: flex;
         .top {
           &__left {
-            width: 250px;
-            height: 150px;
+            width: 100px;
+            height: 50px;
             background: $color-danger;
           }
           &__right {
-            width: 250px;
-            height: 150px;
+            width: 100px;
+            height: 50px;
             background: $color-primary;
           }
         }
       }
       &__bottom {
-        height: #{$base-height+50}px;
+        height: #{$base-height + 50}px;
         background: $color-warning;
       }
     }
