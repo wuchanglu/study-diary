@@ -1,0 +1,44 @@
+$color-background: rgb(236, 236, 236);
+$color-primary: #3ecacb;
+$color-success: #4fc48d;
+$color-warning: #f3d93f;
+$color-danger: #f6588e;
+$color-info: #27c6fa;
+$color-mix:mix($color-danger, $color-warning, $weight:70%);
+$base-path: "../assets/";
+$icon-logo: $base-path + "logo.png";
+$base-height: 80;
+@mixin icon($name) {
+  background: url($name);
+  background-size: 100% 100%;
+}
+.flex-x {
+  display: flex;
+  flex-direction: row;
+}
+@mixin layout($class) {
+  &__#{$class} {
+    width: 200px;
+    .#{$class} {
+      &__top {
+        display: flex;
+        .top {
+          &__left {
+            width: 100px;
+            height: 50px;
+            background: $color-danger;
+          }
+          &__right {
+            width: 100px;
+            height: 50px;
+            background: $color-primary;
+          }
+        }
+      }
+      &__bottom {
+        height: #{$base-height + 50}px;
+        background: $color-warning;
+      }
+    }
+  }
+}
