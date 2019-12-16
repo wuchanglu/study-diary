@@ -6,11 +6,12 @@
     height: 64px;
     .link {
       &__item {
+        min-width: 100px;
         padding: 0 20px;
         white-space: nowrap;
         cursor: pointer;
         color: rgb(192, 192, 192);
-        transition: all 0.8s;
+        transition: all 0.5s;
         &:hover {
           color: #fff;
         }

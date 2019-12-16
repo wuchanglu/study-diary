@@ -1,6 +1,7 @@
 @import "~antd/dist/antd.css";
 .App {
   text-align: center;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 li {
 }
@@ -8,4 +9,17 @@ ul {
   list-style-type: none;
   margin: 0;
 }
-
+div,
+ul,
+li,
+img,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  box-sizing: content-box;
+}

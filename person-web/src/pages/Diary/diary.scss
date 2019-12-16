@@ -1,0 +1,54 @@
+.diary {
+  margin: 40px auto;
+  max-width: 1200px;
+  min-height: 200px;
+  padding: 0 40px;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+  &__title {
+    margin-bottom: 5px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  &__discription {
+    font-weight: normal;
+    font-size: 18px;
+  }
+  hgroup {
+    padding: 24px 0;
+    text-align: left;
+  }
+  .navigation{
+      ul{
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding: 0;
+          height: 55px;
+          li{
+              padding: 0 20px;
+              font-size: 18px;
+              line-height: 55px;
+              color: rgb(112, 112, 112);
+              cursor: pointer;
+              &:hover{
+                  color: #000;
+              }
+          }
+          &::after{
+              content:'';
+              position: absolute;
+              bottom: 0;
+              width: 100%;
+              border-bottom: 1px solid rgb(230, 230, 230);
+          }
+          &::before{
+              content:'';
+              position: absolute;
+              top: 0;
+              width: 100%;
+              border-bottom: 1px solid rgb(230, 230, 230);
+          }
+      }
+  }
+}

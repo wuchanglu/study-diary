@@ -4,14 +4,21 @@ class Head extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      choosedInded: 0,
+      choosedIndex: 0,
       links: [
-        { text: "JavaScript", key: "JavaScript" },
-        { text: "H5+CSS3", key: "H5+CSS3" },
-        { text: "Vue", key: "Vue" },
-        { text: "React", key: "React" }
+        { text: "Diary", key: "Diary" },
+        { text: "Demo", key: "Demo" },
+        // { text: "Vue", key: "Vue" },
+        // { text: "React", key: "React" }
       ]
     };
+    this.chooseItem = this.chooseItem.bind(this);
+  }
+  chooseItem(item, index) {
+    this.setState({
+      choosedIndex:index
+    })
+    console.log(item, index);
   }
   render() {
     return (
@@ -23,9 +30,14 @@ class Head extends React.Component {
               return (
                 <li
                   className={`link__item ${
-                    this.state.choosedInded === index ? "link__item-choosed" : ""
+                    this.state.choosedIndex === index
+                      ? "link__item-choosed"
+                      : ""
                   }`}
                   key={item.key}
+                  onClick={() => {
+                    this.chooseItem(item, index);
+                  }}
                 >
                   {item.text}
                 </li>
