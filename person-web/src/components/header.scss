@@ -1,0 +1,37 @@
+.header {
+  background: yellowgreen;
+  &__link {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    .link {
+      &__item {
+        padding: 0 20px;
+        white-space: nowrap;
+        cursor: pointer;
+        color: rgb(192, 192, 192);
+        transition: all 0.8s;
+        &:hover {
+          color: #fff;
+        }
+        &-choosed {
+          color: #fff;
+          background-color: #1890ff;
+        }
+      }
+    }
+  }
+  &__wrap {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    line-height: 64px;
+    background: #001529;
+  }
+}
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+}
