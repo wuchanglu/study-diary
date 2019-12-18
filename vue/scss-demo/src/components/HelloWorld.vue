@@ -43,7 +43,7 @@ ul li {
 .hello {
   margin: 0 auto;
   width: 90vw;
-  height: 100vh;
+  height: 200vh;
   background: $color-background;
   &__logo {
     width: 50px;
