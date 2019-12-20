@@ -1,5 +1,7 @@
 import React, { Fragment, Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link,withRouter } from "react-router-dom";
 import "./diary.scss";
+import Detail from "./detail/detail";
 class Diary extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,16 @@ class Diary extends Component {
         </hgroup>
         <Navigation></Navigation>
         <section className="diary__section">
-          <Content></Content>
+          <Router>
+            <Switch>
+              <Route path="/">
+                <Content></Content>
+              </Route>
+              <Route path="/detail">
+                <Detail></Detail>
+              </Route>
+            </Switch>
+          </Router>
           <WidgetArea></WidgetArea>
         </section>
       </div>
@@ -63,24 +74,45 @@ class Content extends Component {
         }
       ]
     };
+    this.linkToDetail = this.linkToDetail.bind(this);
+  }
+  linkToDetail(item, index) {
+    console.log(this, item, index);
   }
   render() {
     return (
       <div className="content">
         {this.state.list.map((item, index) => {
           return (
-            <article className="content__item" key={index}>
+            <article
+              className="content__item"
+              key={index}
+              onClick={() => {
+                return this.linkToDetail(item, index);
+              }}
+            >
               <header className="item__header">
-                <a className="header__title">{item.title}</a>
+                <a href="#" className="header__title">
+                  {item.title}
+                </a>
               </header>
               <div className="item__body">{item.content}</div>
               <footer className="item__footer">
-                发布于 <a className="footer__link">{item.time}</a>。 属于
-                <a className="footer__link">{item.type}</a>分类，被贴了
+                发布于{" "}
+                <a href="#" className="footer__link">
+                  {item.time}
+                </a>
+                。 属于
+                <a href="#" className="footer__link">
+                  {item.type}
+                </a>
+                分类，被贴了
                 {item.tags.map((tag, tagIndex) => {
                   return (
                     <Fragment key={tagIndex}>
-                      <a className="footer__link">{tag}</a>
+                      <a href="#" className="footer__link">
+                        {tag}
+                      </a>
                       {tagIndex < item.tags.length ? " - " : ""}
                     </Fragment>
                   );
