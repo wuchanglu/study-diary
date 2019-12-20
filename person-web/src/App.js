@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "./components/header";
-// import { BrowserRouter as Router, ithRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 
 import Diary from "./pages/Diary/index.js";
@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       <Head></Head>
-      {/* <Router> */}
+      <Router>
         <Diary></Diary>
-      {/* </Router> */}
+      </Router>
     </div>
   );
 }
