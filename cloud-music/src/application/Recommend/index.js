@@ -1,7 +1,9 @@
 //src/appliction/Recommend/index.js
-import React from "react";
+import React, { useRef } from "react";
 import Slider from "../../components/slider";
 import RecommendList from "../../components/list";
+import Scroll from "../../baseUI/scroll/index";
+import { Content } from "./style";
 
 function Recommend() {
   //mock 数据
@@ -21,12 +23,17 @@ function Recommend() {
       name: "朴树、许巍、李健、郑钧、老狼、赵雷"
     };
   });
-
+  const scrollRef = useRef();
+  // console.log(scrollRef);
   return (
-    <div>
-      <Slider bannerList={bannerList}></Slider>
-      <RecommendList recommendList={recommendList}></RecommendList> 
-    </div>
+    <Content>
+      <Scroll className="list" ref={scrollRef}>
+        <div>
+          <Slider bannerList={bannerList}></Slider>
+          <RecommendList recommendList={recommendList}></RecommendList>
+        </div>
+      </Scroll>
+    </Content>
   );
 }
 
