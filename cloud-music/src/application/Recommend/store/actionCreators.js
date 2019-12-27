@@ -22,7 +22,7 @@ export const getBannerList = () => {
       .then(data => {
         dispatch(changeBannerList(data.banners));
       })
-      .catch(() => {
+      .catch((err) => {
         console.log("轮播图数据传输错误");
       });
   };
@@ -34,7 +34,7 @@ export const getRecommendList = () => {
       .then(data => {
         dispatch(changeRecommendList(data.result));
       })
-      .catch(() => {
+      .catch((err) => {
         console.log("推荐歌单数据传输错误");
       });
   };
