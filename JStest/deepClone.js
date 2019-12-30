@@ -35,6 +35,7 @@ function cloneArray(data) {
 function cloneDate(data) {
   return new Date(data.valueOf());
 }
+module.exports = { deepClone };
 // 实验
 let obj = {
   a: 1,

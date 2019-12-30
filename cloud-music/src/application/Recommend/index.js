@@ -6,6 +6,10 @@ import Scroll from "../../baseUI/scroll/index";
 import { Content } from "./style";
 import { connect } from "react-redux";
 import * as actionTypes from "./store/actionCreators";
+// 引入 forceCheck 方法
+import { forceCheck } from "react-lazyload";
+// loding效果
+import Loading from "../../baseUI/loading/index"
 
 function Recommend(props) {
   const { bannerList, recommendList } = props;
@@ -24,12 +28,13 @@ function Recommend(props) {
   // console.log(scrollRef);
   return (
     <Content>
-      <Scroll className="list" ref={scrollRef}>
+      <Scroll className="list" ref={scrollRef} onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerListJS}></Slider>
           <RecommendList recommendList={recommendListJS}></RecommendList>
         </div>
       </Scroll>
+      <Loading></Loading>
     </Content>
   );
 }
