@@ -22,7 +22,6 @@ const Scroll = forwardRef((props, ref) => {
   const scrollContaninerRef = useRef();
 
   //   setTimeout(() => {
-  console.log(scrollContaninerRef);
   //   }, 0);
   //   获取props传递的参数
   const {
@@ -36,7 +35,6 @@ const Scroll = forwardRef((props, ref) => {
   } = props;
   //   获取props传递的方法
   const { pullUp, pullDown, onScroll } = props;
-  console.log(props)
   //   创建 better-scroll(仅在创建时候执行一次)
   useEffect(() => {
     const scroll = new BScroll(scrollContaninerRef.current, {

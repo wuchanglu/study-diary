@@ -9,16 +9,20 @@ import * as actionTypes from "./store/actionCreators";
 // 引入 forceCheck 方法
 import { forceCheck } from "react-lazyload";
 // loding效果
-import Loading from "../../baseUI/loading/index"
+import Loading from "../../baseUI/loading/index";
 
 function Recommend(props) {
-  const { bannerList, recommendList } = props;
+  const { bannerList, recommendList, enterLoading } = props;
 
   const { getBannerDataDispatch, getRecommendListDataDispatch } = props;
 
   useEffect(() => {
-    getBannerDataDispatch();
-    getRecommendListDataDispatch();
+    if (!bannerList.size) {
+      getBannerDataDispatch();
+    }
+    if (!recommendList.size) {
+      getRecommendListDataDispatch();
+    }
     //eslint-disable-next-line
   }, []);
   const bannerListJS = bannerList ? bannerList.toJS() : [];
@@ -34,7 +38,7 @@ function Recommend(props) {
           <RecommendList recommendList={recommendListJS}></RecommendList>
         </div>
       </Scroll>
-      <Loading></Loading>
+      {enterLoading ? <Loading></Loading> : null}
     </Content>
   );
 }
@@ -44,7 +48,8 @@ const mapStateToProps = state => ({
   // 不要在这里将数据 toJS
   // 不然每次 diff 比对 props 的时候都是不一样的引用，还是导致不必要的重渲染，属于滥用 immutable
   bannerList: state.getIn(["recommend", "bannerList"]),
-  recommendList: state.getIn(["recommend", "recommendList"])
+  recommendList: state.getIn(["recommend", "recommendList"]),
+  enterLoading: state.getIn(["recommend", "enterLoading"])
 });
 // 映射 dispatch 到 props 上
 const mapDispatchToProps = dispatch => {
@@ -62,5 +67,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(React.memo(Recommend));
-
-// export default React.memo(Recommend);
