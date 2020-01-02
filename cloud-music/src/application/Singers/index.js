@@ -16,16 +16,6 @@ import {
   refreshMoreHotSingerList
 } from "./store/actionCreators";
 
-// mock 数据
-const singerList = new Array(100).fill(0).map(item => {
-  return {
-    picUrl:
-      "https://p2.music.126.net/uTwOm8AEFFX_BYHvfvFcmQ==/109951164232057952.jpg",
-    name: "隔壁老樊",
-    accountId: 277313426
-  };
-});
-
 const renderSingerList = list => {
   return (
     <List>
