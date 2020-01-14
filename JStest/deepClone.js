@@ -53,3 +53,11 @@ let obj1 = deepClone(obj);
 
 console.log(obj1);
 console.log(obj1.b.d === obj.b.d);
+// 基于messageChanle的深拷贝
+function deepCloneByMC(obj) {
+  return new Promise((resolve, reject) => {
+    const { port1, port2 } = new MessageChannel();
+    port1.onmessage = e => resolve(e);
+    port2.postMessage(obj);
+  });
+}
