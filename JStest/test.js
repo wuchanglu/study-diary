@@ -63,18 +63,60 @@ let foreach = 0;
 let bymap = 0;
 let byfilter = 0;
 let byfor = 0;
-console.log("start...");
-for (let i = 0; i < times; i++) {
-  forof += getTimeByForOf();
-  foreach += getTimeByForEach();
-  bymap += getTimeByMap();
-  byfilter += getTimeByFilter();
-  byfor += getTimeByFor();
-}
+// console.log("start...");
+// for (let i = 0; i < times; i++) {
+//   forof += getTimeByForOf();
+//   foreach += getTimeByForEach();
+//   bymap += getTimeByMap();
+//   byfilter += getTimeByFilter();
+//   byfor += getTimeByFor();
+// }
 
-console.log("for of", forof / times);
-console.log("forEach", foreach / times);
-console.log("map", bymap / times);
-console.log("filter", byfilter / times);
-console.log("for", byfor / times);
-console.log("total", forof + foreach + bymap + byfilter + byfor);
+// console.log("for of", forof / times);
+// console.log("forEach", foreach / times);
+// console.log("map", bymap / times);
+// console.log("filter", byfilter / times);
+// console.log("for", byfor / times);
+// console.log("total", forof + foreach + bymap + byfilter + byfor);
+
+function stepOne() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("我是第一步");
+    }, 2000);
+  });
+}
+function stepTwo() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject("我是第二步");
+    }, 1000);
+  });
+}
+function stepThree() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject("第三步出错了");
+    }, 1000);
+  });
+}
+const one = stepOne();
+const two = stepTwo();
+const three = stepThree()
+Promise.all([one, two,three])
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+// async function doing(){
+//   const one= await stepOne()
+//   console.log("-----")
+//   const two =await stepTwo(one)
+//   console.log(two)
+// }
+// doing()
+// const pro = stepOne().then(stepTwo).then(res=>{
+//   console.log(res)
+// })
