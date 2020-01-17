@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <signature></signature>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import signature from "./components/signature"
+// import HelloWorld from "./components/HelloWorld.vue";
 import mixins from "./mixins/index";
 export default {
   name: "app",
   mixins: [mixins],
   components: {
-    HelloWorld
+    // HelloWorld,
+    signature
   },
   created() {},
   mounted() {
@@ -20,6 +23,11 @@ export default {
 </script>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

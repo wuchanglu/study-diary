@@ -78,21 +78,4 @@ p1.then(res => {
   //   console.log("final", res);
 });
 
-function test(name) {
-  this.name = name;
-  function sayName() {
-    console.log("say", that.name);
-  }
-  if (o1) {
-    //   console.log(this)
-    var that = o1;
-    this.doing(sayName);
-  }
-}
-test.prototype.doing = function(fun) {
-  var that = this;
-  console.log(this,that)
-  fun();
-};
-var o1 = new test("aaa");
-var o2 = new test("bbb");
+
