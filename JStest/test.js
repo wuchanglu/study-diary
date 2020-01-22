@@ -120,3 +120,22 @@ Promise.all([one, two,three])
 // const pro = stepOne().then(stepTwo).then(res=>{
 //   console.log(res)
 // })
+var obj={
+  "2":"a",
+  "3":"b",
+  "length":2,
+  "push":Array.prototype.push,
+  "splice":Array.prototype.splice
+}
+obj.push("c")
+obj.push("d")
+var s= "dhwqjkdgwqhdgahjhdvsadsadjkasdhaxkldsfdlskfjkdsfdjskz"
+function test(str){
+  var temp={}
+  var arr =[]
+  for(let i = 0;i<str.length;i++){
+    if(!temp[str[i]]){
+      arr.push()
+    }
+  }
+}
