@@ -34,7 +34,8 @@ module.exports = {
   plugins: [
     '@/plugins/iview',
     { src: '@/plugins/mavon-editor', srr: false },
-    '@/plugins/axios'
+    '@/plugins/axios',
+    '@/plugins/route'
   ],
   /*
    ** Nuxt.js dev-modules

@@ -47,8 +47,8 @@ export default {
       ]
     };
   },
-  async asyncData({ req }) {
-    console.log(req);
+  async asyncData({ params }) {
+    console.log(params);
     const data = await new Promise((resolve, rject) => {
       resolve("he he");
     });

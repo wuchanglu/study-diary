@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <!-- <signature></signature> -->
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <signature></signature>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
   </div>
 </template>
 

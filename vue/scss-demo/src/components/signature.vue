@@ -52,7 +52,7 @@ export default {
     move(e) {
       if (!this.isTouching) return;
       const position = this.getPosition(e);
-      console.log(position, this.startPosition);
+      // console.log(position, this.startPosition);
       this.canvas.moveTo(
         this.startPosition.x * (300 / this.width),
         this.startPosition.y * (150 / this.height)
@@ -72,11 +72,11 @@ export default {
         this.startPosition.x * (300 / this.width),
         this.startPosition.y * (150 / this.height)
       );
-      console.log(this.startPosition);
+      // console.log(this.startPosition);
     },
     end() {
       this.isTouching = false;
-      console.log("end");
+      // console.log("end");
     },
     getPosition(e) {
       if (e.offsetX || e.offsetY) {
@@ -100,7 +100,7 @@ export default {
     this.canvas.lineWidth = this.lineWidth;
     //设置线两端端点样式更加圆润
     this.canvas.lineCap = this.lineCap;
-    console.log(this.getPosition);
+    // console.log(this.getPosition);
   },
   watch: {
     isTouching() {
