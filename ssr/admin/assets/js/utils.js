@@ -48,7 +48,7 @@ function copyStr(str) {
 function formatDataEQ(str = '') {
   let obj = {}
   try {
-    str.split(',').forEach(item => {
+    str.split(/[,;]/g).forEach(item => {
       const data = item.split('=')
       if (data.length) {
         obj[data[0]] = data[1]

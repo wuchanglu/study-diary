@@ -1,7 +1,12 @@
 import { formatDataEQ } from '../assets/js/utils.js'
 
 export default async function({ app, req, redirect, route }) {
-  const query = formatDataEQ(req.headers.cookie)
+  let query=null
+  if(!req){
+    query=formatDataEQ(document.cookie)
+  }else{
+    query = formatDataEQ(req.headers.cookie)
+  }
   if (!query.key) {
     try {
       window.location.href = `${window.location.origin}`

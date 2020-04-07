@@ -71,7 +71,8 @@ export default {
     }
   },
   mounted() {
-    // this.activeName = 'person'
+    // console.log(this.$route.name)
+    // this.activeName = this.$route.name.replace("home-","")
     // this.$nextTick(() => {
     //   console.log(this.$refs.menu.updateActiveName())
     //   // .updateactiveName()
