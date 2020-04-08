@@ -61,12 +61,8 @@ export default {
       this.userInfo.avator = url;
     }
   },
-  mounted() {
-    console.log(this.$store.state);
-  },
-  asyncData({ store }) {
-    console.log(store.state);
-  }
+  mounted() {},
+  asyncData({ store }) {}
 };
 </script>
 

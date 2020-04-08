@@ -72,11 +72,11 @@ export default {
   },
   mounted() {
     // console.log(this.$route.name)
-    // this.activeName = this.$route.name.replace("home-","")
-    // this.$nextTick(() => {
-    //   console.log(this.$refs.menu.updateActiveName())
-    //   // .updateactiveName()
-    // })
+    this.activeName = this.$route.name.replace("home-","")
+    this.$nextTick(() => {
+      this.$refs.menu.updateActiveName()
+      // .updateactiveName()
+    })
   },
   async asyncData(params) {
     // if (query.key) {

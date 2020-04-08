@@ -77,6 +77,7 @@ export default {
         return false;
       }
       Cookies.set("userid", "sdad4as65d4as56d", { expires: 1 });
+      this.$Message.success("登录成功，即将跳转页面!")
       setTimeout(() => {
         this.$router.push({
           name: "home-person"
