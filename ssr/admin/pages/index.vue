@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   computed: {
     userInfo() {
@@ -75,6 +76,12 @@ export default {
       if (!can) {
         return false;
       }
+      Cookies.set("userid", "sdad4as65d4as56d", { expires: 1 });
+      setTimeout(() => {
+        this.$router.push({
+          name: "home-person"
+        });
+      }, 500);
     }
   },
   created() {}

@@ -8,38 +8,21 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const diary = require('./routes/diary')
-const cors = require('koa2-cors')
-// 导入koa-session
-const Koa_Session = require('koa-session');
-const {session_signed_key,session_config }=require("./utils/session/index")
-const session = Koa_Session(session_config,app)
-app.use(session)
+
 // error handler
 onerror(app)
 
 // middlewares
-app.use(
-  bodyparser({
-    enableTypes: ['json', 'form', 'text']
-  })
-)
-app.use(
-  cors({
-    origin: function(ctx) {
-      return '*'
-    }
-  })
-)
+app.use(bodyparser({
+  enableTypes:['json', 'form', 'text']
+}))
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(
-  views(__dirname + '/views', {
-    extension: 'pug'
-  })
-)
+app.use(views(__dirname + '/views', {
+  extension: 'pug'
+}))
 
 // logger
 app.use(async (ctx, next) => {
@@ -52,11 +35,10 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
-app.use(diary.routes(), diary.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
-})
+});
 
 module.exports = app

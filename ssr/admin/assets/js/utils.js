@@ -49,7 +49,7 @@ function formatDataEQ(str = '') {
   let obj = {}
   try {
     str.split(/[,;]/g).forEach(item => {
-      const data = item.split('=')
+      const data = item.trim().split('=')
       if (data.length) {
         obj[data[0]] = data[1]
       }
