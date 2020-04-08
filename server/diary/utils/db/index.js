@@ -24,6 +24,16 @@ class UserDb {
       })
     })
   }
+  queryById(id) {
+    return new Promise((resolve, reject) => {
+      userModal.find({ _id: id }, (err, res) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(res)
+      })
+    })
+  }
   save() {}
 }
 module.exports = new UserDb()

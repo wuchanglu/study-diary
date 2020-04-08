@@ -29,7 +29,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/iview',
-    { src: '@/plugins/vue-mavon-editor', ssr: false }
+    { src: '@/plugins/vue-mavon-editor', ssr: false },
+    '@/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -38,7 +39,10 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    baseURL: 'http://192.168.16.105:3796/'
+  },
   /*
   ** Build configuration
   */

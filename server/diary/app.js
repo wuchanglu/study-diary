@@ -10,11 +10,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const diary = require('./routes/diary')
 const cors = require('koa2-cors')
-// 导入koa-session
-const Koa_Session = require('koa-session');
-const {session_signed_key,session_config }=require("./utils/session/index")
-const session = Koa_Session(session_config,app)
-app.use(session)
+
 // error handler
 onerror(app)
 

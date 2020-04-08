@@ -51,7 +51,6 @@
   </div>
 </template>
 <script>
-// import {mapMutations}
 export default {
   data() {
     return {
@@ -71,13 +70,19 @@ export default {
     }
   },
   mounted() {
-    this.activeName = this.$route.name.replace("home-","")
+    this.activeName = this.$route.name.replace('home-', '')
     this.$nextTick(() => {
       this.$refs.menu.updateActiveName()
       // .updateactiveName()
     })
   },
   async asyncData(params) {
+    // const res = await params.$axios.post('users/userInfoByid', {
+    //   id: params.store.state.userid
+    // })
+    // params.store.commit('setUserInfo', res.data.userInfo)
+    // params.store.commit('setUserInfo', userInfo)
+    // const userInfo = await
     // if (query.key) {
     //   return {
     //     activeName: req.url.replace('/home/', '')

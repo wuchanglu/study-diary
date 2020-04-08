@@ -1,6 +1,6 @@
 import { formatDataEQ } from '../assets/js/utils.js'
-
-export default async function({ app, req, redirect, route,store }) {
+import axios from 'axios'
+export default async function({ app, req, redirect, route, store, $axios }) {
   if (!store.state.userid) {
     try {
       window.location.href = `${window.location.origin}`
