@@ -71,7 +71,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.$route.name)
     this.activeName = this.$route.name.replace("home-","")
     this.$nextTick(() => {
       this.$refs.menu.updateActiveName()

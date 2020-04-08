@@ -93,7 +93,6 @@ export default {
       this.$refs.markdown.$img2Url(fileIndex, url)
     },
     imgDel(index) {
-      // console.log(this.$refs.markdown.$img3Url[index])
     },
     back() {}
   },
