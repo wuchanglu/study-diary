@@ -1,20 +1,23 @@
+// 扩大可点击区域
 const extendClick = () => {
   return `
-    position:relative;
-    &:before{
-        content:'';
-        position:absolute;
-        top:-10px;bottom:-10px;left:-10px;right:-10px;
-    };
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        top: -10px; bottom: -10px; left: -10px; right: -10px;
+      };
     `;
 };
+// 一行文字溢出部分用... 代替
 const noWrap = () => {
   return `
-    text-overflow:ellipsis;
-    overflow:hidden;
-    white-space:nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     `;
 };
+
 export default {
   "theme-color": "#d44439",
   "theme-color-shadow": "rgba (212, 68, 57, .5)",
@@ -31,5 +34,5 @@ export default {
   "background-color-shadow": "rgba (0, 0, 0, 0.3)",
   "highlight-background-color": "#fff",
   extendClick,
-  noWrap
+  noWrap,
 };

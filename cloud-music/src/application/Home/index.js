@@ -1,7 +1,6 @@
-//src/appliction/Home/index.js
 import React from "react";
 import { renderRoutes } from "react-router-config";
-import { Top, Tab, TabItem } from "./style";
+import { Top, Tab } from "./style";
 import { NavLink } from "react-router-dom";
 
 function Home(props) {
@@ -14,20 +13,14 @@ function Home(props) {
         <span className="iconfont search">&#xe62b;</span>
       </Top>
       <Tab>
-        <NavLink className="link" to="/recommend" activeClassName="selected">
-          <TabItem>
-            <span> 推荐 </span>
-          </TabItem>
+        <NavLink to="/recommend" activeClassName="selected">
+          <span>推荐</span>
         </NavLink>
         <NavLink to="/singers" activeClassName="selected">
-          <TabItem>
-            <span> 歌手 </span>
-          </TabItem>
+          <span>歌手</span>
         </NavLink>
         <NavLink to="/rank" activeClassName="selected">
-          <TabItem>
-            <span> 排行榜 </span>
-          </TabItem>
+          <span>排行榜</span>
         </NavLink>
       </Tab>
       {renderRoutes(route.routes)}
