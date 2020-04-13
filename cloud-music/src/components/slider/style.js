@@ -4,13 +4,13 @@ export const SliderContainer = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   margin: auto;
   background: white;
   .before {
     position: absolute;
-    top: 0;
-    height: 60%;
+    top: -300px;
+    height: 400px;
     width: 100%;
     background: ${style["theme-color"]};
   }
