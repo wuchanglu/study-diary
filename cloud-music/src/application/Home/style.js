@@ -16,6 +16,8 @@ export const Top = styled.div`
   }
 `;
 export const Tab = styled.div`
+  position: relative;
+  z-index: 5;
   height: 44px;
   display: flex;
   flex-direction: row;
@@ -27,9 +29,9 @@ export const Tab = styled.div`
     font-size: 14px;
     color: #e4e4e4;
     display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
   & > .selected {
     span {
