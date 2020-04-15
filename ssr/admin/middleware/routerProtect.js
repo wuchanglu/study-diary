@@ -7,5 +7,11 @@ export default async function({ app, req, redirect, route, store, $axios }) {
     } catch (error) {
       redirect({ path: '/' })
     }
+  } else if (route.path === '/') {
+    try {
+      window.location.href = `${window.location.origin}/home/person`
+    } catch (error) {
+      redirect({ path: '/home/person' })
+    }
   }
 }

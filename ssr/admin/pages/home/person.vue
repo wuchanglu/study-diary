@@ -26,7 +26,8 @@
       </Form-item>
       <Form-item>
         <i-button type="primary"
-          size="large">保存</i-button>
+          size="large"
+          @click="submitUserInfo">保存</i-button>
       </Form-item>
     </i-form>
     <input class="hide"
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { upload } from '../../assets/js/utils.js'
 export default {
   data() {
@@ -50,6 +52,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['getUserid'])
+  },
   methods: {
     avatorClick() {
       this.$refs.file.click()
@@ -59,6 +64,14 @@ export default {
       e.target.value = ''
       const url = await upload(file)
       this.userInfo.avator = url
+    },
+    async submitUserInfo() {
+      const url = 'users/updateUserInfo'
+      const res = this.$axios.$post(
+        url,
+        Object.assign({ userid: this.getUserid }, this.userInfo)
+      )
+      console.log(res)
     }
   },
   mounted() {

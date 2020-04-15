@@ -9,7 +9,11 @@
           ref="menu"
           :active-name="activeName"
           @on-select="menuSelect">
-          <div class="layout-logo-left"></div>
+          <div class="layout-logo-left">
+            <i-button style="width:100%"
+              type="success"
+              @click="copy">复制博客地址</i-button>
+          </div>
           <Menu-item name="person"
             key="person">
             <Icon type="ios-home"></Icon>
@@ -51,9 +55,12 @@
   </div>
 </template>
 <script>
+import { copyStr } from '@/assets/js/utils.js'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      url: '',
       activeName: '',
       routerNameData: {
         block: 'home-block',
@@ -62,7 +69,13 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['getUserid'])
+  },
   methods: {
+    copy() {
+      copyStr(this.url)
+    },
     menuSelect(data) {
       this.$router.push({
         name: this.routerNameData[data]
@@ -70,24 +83,23 @@ export default {
     }
   },
   mounted() {
+    this.url = `${location.hostname}:3000/${this.getUserid}`
     this.activeName = this.$route.name.replace('home-', '')
     this.$nextTick(() => {
       this.$refs.menu.updateActiveName()
       // .updateactiveName()
     })
   },
+  watch: {
+    '$route.path': {
+      handler() {
+        this.activeName = this.$route.name.replace('home-', '')
+      }
+    }
+  },
   async asyncData(params) {
-    // const res = await params.$axios.post('users/userInfoByid', {
-    //   id: params.store.state.userid
-    // })
-    // params.store.commit('setUserInfo', res.data.userInfo)
-    // params.store.commit('setUserInfo', userInfo)
-    // const userInfo = await
-    // if (query.key) {
-    //   return {
-    //     activeName: req.url.replace('/home/', '')
-    //   }
-    // } else {
+    // return {
+    //   url:`${params.r}`
     // }
   }
 }

@@ -1,13 +1,24 @@
 <template>
   <div class="mavonEditor">
     <i-form style="padding:10px 0">
-      <form-item style="text-align:right">
-        <i-button type="primary"
-          class="backButton"
-          @click="back">返回</i-button>
-        <i-button type="success"
-          class="backButton"
-          @click="saveButtonClick">保存</i-button>
+      <form-item label="类型"
+        :label-width="80">
+        <div class="operaiton">
+          <Select v-model="typeid"
+            style="width:350px">
+            <Option v-for="item in typeList"
+              :value="item._id"
+              :key="item._id">{{ item.name }}</Option>
+          </Select>
+          <div class="button-wrapper">
+            <i-button type="primary"
+              class="backButton"
+              @click="back">返回</i-button>
+            <i-button type="success"
+              class="backButton"
+              @click="saveButtonClick">保存</i-button>
+          </div>
+        </div>
       </form-item>
       <form-item label="标题"
         :label-width="80">
@@ -27,8 +38,8 @@
       <mavon-editor ref="markdown"
         style="height:550px"
         :toolbars="markdownOption"
-        v-model="handbook"
-        @save="saveButtonClick"
+        v-model="detail.markdown"
+        @change="change"
         @imgAdd="imgAdd"
         @imgDel="imgDel"></mavon-editor>
     </client-only>
@@ -36,11 +47,18 @@
 </template>
 <script>
 import { upload } from '../../assets/js/utils.js'
-
+import { mapGetters } from 'vuex'
 export default {
   computed: {},
   data() {
     return {
+      typeid: this.$route.query.typeid,
+      typeList: [
+        {
+          name: 'aa',
+          _id: 'asdhgasidhsa'
+        }
+      ],
       markdownOption: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -79,25 +97,111 @@ export default {
       handbook: '#### how to use mavonEditor in nuxt.js',
       detail: {
         title: '',
-        introduce: ''
+        introduce: '',
+        html: '',
+        markdown: ''
       }
     }
   },
+  computed: {
+    ...mapGetters(['getUserid'])
+  },
   methods: {
     async getData() {},
-    saveButtonClick(value, render) {},
-    async update(value, render) {},
-    async save(value, render) {},
+    change(value, render) {
+      this.detail.html = render
+      this.detail.markdown = value
+    },
+    saveButtonClick() {
+      if (!this.typeid) {
+        this.$Message.warning('请选择类型')
+        return
+      }
+      if (!this.detail.title) {
+        this.$Message.warning('请输入标题')
+        return
+      }
+      if (!this.detail.introduce) {
+        this.$Message.warning('请输入简介')
+        return
+      }
+      if (!this.detail.html) {
+        this.$Message.warning('请输入内容')
+        return
+      }
+      if (!this.detail.userid) {
+        this.save()
+      } else {
+        this.update()
+      }
+    },
+    async update(value, render) {
+      let params = {
+        title: this.detail.title,
+        introduce: this.detail.introduce,
+        html: this.detail.html,
+        markdown: this.detail.markdown,
+        userid: this.getUserid,
+        typeid: this.typeid,
+        id: this.detail._id
+      }
+      const res = await this.$axios.$post('diary/update', params)
+      if (res.state === 200) {
+        this.$Message.success('更新成功')
+      }
+    },
+    async save(value, render) {
+      let params = {
+        title: this.detail.title,
+        introduce: this.detail.introduce,
+        html: this.detail.html,
+        markdown: this.detail.markdown,
+        userid: this.getUserid,
+        typeid: this.typeid
+      }
+      const res = await this.$axios.$post('diary/add', params)
+      if (res.state === 200) {
+        this.$Message.success('保存成功')
+        this.$router.push({
+          query: {
+            typeid: this.typeid,
+            id: res.id
+          }
+        })
+      }
+    },
     async imgAdd(fileIndex, file) {
       const url = await upload(file)
       this.$refs.markdown.$img2Url(fileIndex, url)
     },
-    imgDel(index) {
-    },
-    back() {}
+    imgDel(index) {},
+    back() {
+      this.$router.go(-1)
+    }
   },
   created() {},
-  mounted() {}
+  mounted() {},
+  async asyncData({ route, $axios, store }) {
+    let returnData = {}
+    const res = await $axios.$get(
+      `diary/type/list?userid=${store.state.userid}&limit=true`
+    )
+    returnData.typeList = res.state === 200 ? res.list : []
+    returnData.typeid = route.query.typeid
+    if (route.query.id) {
+      const res = await $axios.get(`diary/detail?id=${route.query.id}`)
+      returnData.detail =
+        res.data.state === 200
+          ? res.data.data
+          : {
+              title: '',
+              introduce: '',
+              html: '',
+              markdown: ''
+            }
+    }
+    return returnData
+  }
 }
 </script>
 
@@ -106,6 +210,11 @@ export default {
   width: 100%;
   height: 100%;
   .backButton {
+  }
+  .operaiton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 </style>

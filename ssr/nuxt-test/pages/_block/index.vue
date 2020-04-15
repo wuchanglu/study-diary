@@ -1,60 +1,70 @@
 <template>
   <div class="page">
-    <com-header></com-header>
     <section class="page__message">
-      <h1 class="message__title">吴昌禄的博客</h1>
-      <p class="message__motto">座右铭</p>
-      <button class="message__button">getStarted</button>
+      <h1 class="message__title">{{getUserInfo.block_name}}</h1>
+      <p class="message__motto">{{getUserInfo.motto}}</p>
+      <button class="message__button"
+        @click="linkToBlock">getStarted</button>
     </section>
     <section class="page__feature">
-      <div
-        class="feature__block"
+      <div class="feature__block"
         v-for="(item, index) in featureList"
-        :key="index"
-      >
-        <img :src="item.pic" alt="" />
+        :key="index">
+        <img :src="item.pic"
+          alt="" />
         <p>{{ item.name }}</p>
         <label>{{ item.label }}</label>
       </div>
     </section>
-    <footer>created by 十三先生</footer>
+    <footer>created by {{getUserInfo.nick_name}}</footer>
   </div>
 </template>
 
 <script>
-import comHeader from "../components/header";
+import { mapGetters } from 'vuex'
+import comHeader from '@/components/header'
 export default {
   components: { comHeader },
   data() {
     return {
-      title: "",
+      title: '',
       featureList: [
         {
-          pic: require("../assets/image/box.png"),
-          name: "精品博客",
-          label: "持续输出中..."
+          pic: require('@/assets/image/box.png'),
+          name: '精品博客',
+          label: '持续输出中...'
         },
         {
-          pic: require("../assets/image/roket.png"),
-          name: "开源项目",
-          label: "打造职业核心竞争力"
+          pic: require('@/assets/image/roket.png'),
+          name: '开源项目',
+          label: '打造职业核心竞争力'
         },
         {
-          pic: require("../assets/image/k7bjsocq_w144_h144.png"),
-          name: "每周导读",
-          label: "实时更新前沿精品文章导读"
+          pic: require('@/assets/image/k7bjsocq_w144_h144.png'),
+          name: '每周导读',
+          label: '实时更新前沿精品文章导读'
         }
       ]
-    };
+    }
+  },
+  computed: {
+    ...mapGetters(['getUserInfo'])
+  },
+  methods: {
+    linkToBlock() {
+      this.$router.push({
+        name: 'block-aritical'
+      })
+    }
   },
   async asyncData({ params }) {
-    console.log(params);
+    console.log(params)
     const data = await new Promise((resolve, rject) => {
-      resolve("he he");
-    });
-    return { title: data };
+      resolve('he he')
+    })
+    return { title: data }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -128,10 +138,11 @@ export default {
       }
     }
   }
-  footer{
+  footer {
     margin: 40px 0;
     color: #999;
     text-align: center;
   }
 }
 </style>
+

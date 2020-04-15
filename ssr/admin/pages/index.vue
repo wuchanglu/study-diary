@@ -76,10 +76,11 @@ export default {
       if (!can) {
         return false
       }
-      const url = `http://192.168.16.105:3796/users/login?phone=${
-        this.formCustom.phone
-      }&password=${this.formCustom.password}`
-      const res = await this.$axios.$get(url)
+      const url = `users/login`
+      const res = await this.$axios.$post(url, {
+        phone: this.formCustom.phone,
+        password: this.formCustom.password
+      })
       if (res.code === 200) {
         this.setUserInfo(res.userInfo)
         this.setUserid(res.userInfo._id)

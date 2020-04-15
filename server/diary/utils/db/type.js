@@ -1,26 +1,20 @@
 const mongose = require('./db')
 const Schema = mongose.Schema
-
-const diarySchema = new Schema(
+const typeSchema = new Schema(
   {
-    title: String,
-    introduce: String,
-    html: String,
-    markdown: String,
-    addTime: String,
     userid: String,
-    typeid: String
+    name: String,
+    add_time: Number,
+    update_time: Number
   },
-  { collection: 'diary' }
+  { collection: 'type' }
 )
-
-const diaryModal = mongose.model('diary', diarySchema)
-
-class diaryDb {
+const typeModal = mongose.model('type', typeSchema)
+class TypeDb {
   constructor() {}
   query(params = {}) {
     return new Promise((resolve, reject) => {
-      diaryModal.find(params, (err, res) => {
+      typeModal.find(params, (err, res) => {
         if (err) {
           reject(err)
         }
@@ -30,7 +24,7 @@ class diaryDb {
   }
   save(params) {
     return new Promise((resolve, reject) => {
-      const save = new diaryModal(params)
+      const save = new typeModal(params)
       save.save(params, (err, res) => {
         if (err) {
           reject(err)
@@ -39,14 +33,9 @@ class diaryDb {
       })
     })
   }
-  updated(params) {
+  update(id, params) {
     let data = {
-      title: params.title,
-      introduce: params.introduce,
-      html: params.html,
-      markdown: params.markdown,
-      userid: params.userid,
-      typeid: params.typeid
+      name: params.name
     }
     Object.keys(data).forEach(key => {
       if (!data[key]) {
@@ -55,7 +44,7 @@ class diaryDb {
     })
     data.updateTime = +new Date()
     return new Promise((resolve, reject) => {
-      diaryModal.update({ _id: params.id }, data, (err, res) => {
+      typeModal.update({ _id: id }, data, (err, res) => {
         if (err) {
           reject(err)
         }
@@ -65,7 +54,7 @@ class diaryDb {
   }
   delete(id) {
     return new Promise((resolve, reject) => {
-      diaryModal.remove({ _id: id }, { justOne: true }, (err, res) => {
+      typeModal.remove({ _id: id }, { justOne: true }, (err, res) => {
         if (err) {
           reject(err)
         }
@@ -74,4 +63,4 @@ class diaryDb {
     })
   }
 }
-module.exports = new diaryDb()
+module.exports = new TypeDb()

@@ -1,4 +1,3 @@
-import { formatDataEQ } from '../assets/js/utils.js'
 export const state = () => {
   const state = {
     userInfo: {},
@@ -23,13 +22,10 @@ export const getters = {
   }
 }
 export const actions = {
-  async nuxtServerInit({ commit }, { req, $axios }) {
-    const cookie = formatDataEQ(req.headers.cookie)
-    if (cookie.userid) {
-      commit('setUserid', cookie.userid)
-    }
+  async nuxtServerInit({ commit }, { params, req, $axios }) {
+    console.log(params)
     const res = await $axios.post('users/userInfoByid', {
-      id: cookie.userid
+      id: params.block
     })
     if (res.data.code === 200) {
       commit('setUserInfo', res.data.userInfo)
