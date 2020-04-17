@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useEffect } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Slider from "../../components/slider/index.js";
 import RecommendList from "../../components/list/index.js";
 import { Content } from "./style";
