@@ -10,6 +10,33 @@ router.get('/', function(ctx, next) {
 router.get('/bar', function(ctx, next) {
   ctx.body = 'this is a users/bar response'
 })
+router.post('/registe', async function(ctx, next) {
+  let data = {
+    state: 100,
+    message: ''
+  }
+  const query = ctx.request.body
+  const check = await UserDb.query(query.phone, query.password)
+  if (check.length) {
+    data.message = '账号已存在'
+    ctx.body = JSON.stringify(data)
+    return
+  }
+  const res = await UserDb.save({
+    phone: query.phone,
+    password: query.password,
+    nick_name: query.nick_name || '',
+    block_name: query.block_name || '',
+    motto: query.motto || '',
+    avator: query.avator || ''
+  })
+  if (res) {
+    data.state = 200
+    data.message = '保存成功'
+    data.id = res._id
+  }
+  ctx.body = JSON.stringify(data)
+})
 router.post('/login', async function(ctx, next) {
   const query = ctx.request.body
   const res = await UserDb.query(query.phone, query.password)

@@ -52,6 +52,16 @@ class UserDb {
       })
     })
   }
-  save() {}
+  save(params) {
+    return new Promise((resolve, reject) => {
+      const save = new userModal(params)
+      save.save(params, (err, res) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(res)
+      })
+    })
+  }
 }
 module.exports = new UserDb()
