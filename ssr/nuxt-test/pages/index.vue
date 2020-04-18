@@ -7,12 +7,11 @@
       <button class="message__button">getStarted</button>
     </section>
     <section class="page__feature">
-      <div
-        class="feature__block"
+      <div class="feature__block"
         v-for="(item, index) in featureList"
-        :key="index"
-      >
-        <img :src="item.pic" alt="" />
+        :key="index">
+        <img :src="item.pic"
+          alt="" />
         <p>{{ item.name }}</p>
         <label>{{ item.label }}</label>
       </div>
@@ -22,39 +21,38 @@
 </template>
 
 <script>
-import comHeader from "../components/header";
+import comHeader from '../components/header'
 export default {
   components: { comHeader },
   data() {
     return {
-      title: "",
+      title: '',
       featureList: [
         {
-          pic: require("../assets/image/box.png"),
-          name: "精品博客",
-          label: "持续输出中..."
+          pic: require('../assets/image/box.png'),
+          name: '精品博客',
+          label: '持续输出中...'
         },
         {
-          pic: require("../assets/image/roket.png"),
-          name: "开源项目",
-          label: "打造职业核心竞争力"
+          pic: require('../assets/image/roket.png'),
+          name: '开源项目',
+          label: '打造职业核心竞争力'
         },
         {
-          pic: require("../assets/image/k7bjsocq_w144_h144.png"),
-          name: "每周导读",
-          label: "实时更新前沿精品文章导读"
+          pic: require('../assets/image/k7bjsocq_w144_h144.png'),
+          name: '每周导读',
+          label: '实时更新前沿精品文章导读'
         }
       ]
-    };
+    }
   },
   async asyncData({ req }) {
-    console.log(req);
     const data = await new Promise((resolve, rject) => {
-      resolve("he he");
-    });
-    return { title: data };
+      resolve('he he')
+    })
+    return { title: data }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -96,6 +94,7 @@ export default {
         border: none;
         border-radius: 20px;
         box-shadow: 1px 1px 5px 2px #4569d4;
+        outline: none;
         cursor: pointer;
         &:hover {
           opacity: 0.8;
@@ -127,7 +126,7 @@ export default {
       }
     }
   }
-  footer{
+  footer {
     margin: 40px 0;
     color: #999;
     text-align: center;

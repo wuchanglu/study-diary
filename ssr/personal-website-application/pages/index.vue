@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
 export default {
   data() {
     return {
@@ -15,13 +14,13 @@ export default {
     };
   },
   components: {
-    Logo
   },
-  created() {
-    new Promise(resolve => {
+  created() {},
+  asyncData() {
+    return new Promise(resolve => {
       resolve();
     }).then(res => {
-      this.name = "this is my application";
+      return {name:"this is my application"}
     });
   }
 };

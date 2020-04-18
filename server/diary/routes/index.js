@@ -7,6 +7,8 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/string', async (ctx, next) => {
+  console.log(ctx.session.test)
+  ctx.session.test=false
   ctx.body = 'koa2 string'
 })
 

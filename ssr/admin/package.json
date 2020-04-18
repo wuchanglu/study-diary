@@ -1,0 +1,35 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "block admin system",
+  "author": "吴昌禄",
+  "private": true,
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "8888"
+    }
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.9.7",
+    "ali-oss": "^6.5.1",
+    "axios": "^0.19.2",
+    "cross-env": "^5.2.0",
+    "iview": "^3.1.5",
+    "js-cookie": "^2.2.1",
+    "koa": "^2.6.2",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "mavon-editor": "^2.8.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

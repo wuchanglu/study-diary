@@ -1,8 +1,10 @@
 <template>
   <header class="header">
-    <div class="header__left" @click="linkToHom">
-      <img src="../assets/image/微信图片_20200331141547.jpg" alt="" />
-      吴昌禄
+    <div class="header__left"
+      @click="linkToHom">
+      <img :src="getUserInfo.avator"
+        alt="" />
+      {{getUserInfo.nick_name}}
     </div>
     <div class="header__right">
       <div class="search">
@@ -10,8 +12,11 @@
         <i class="el-icon-search"></i>
       </div>
       <ul class="nav">
-        <li v-for="(item, index) in navList" :key="index">
-          {{ item.text }}<i v-if="item.icon" :class="item.icon"></i>
+        <li v-for="(item, index) in navList"
+          :key="index"
+          @click="navClick(item)">
+          {{ item.text }}<i v-if="item.icon"
+            :class="item.icon"></i>
         </li>
       </ul>
     </div>
@@ -19,38 +24,49 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       navList: [
         {
-          text: "博客",
-          url: ""
+          text: '博客',
+          url: 'block-aritical'
         },
         {
-          text: "开源项目",
-          url: "",
-          icon: "el-icon-share"
+          text: '开源项目',
+          url: '',
+          icon: 'el-icon-share'
         },
         {
-          text: "每周导读",
-          url: ""
+          text: '每周导读',
+          url: ''
         },
         {
-          text: "优质资源",
-          url: ""
+          text: '优质资源',
+          url: ''
         }
       ]
-    };
+    }
   },
-  methods:{
-      linkToHom(){
-          this.$router.push({
-              name:'index'
-          })
+  computed: {
+    ...mapGetters(['getUserInfo'])
+  },
+  methods: {
+    linkToHom() {
+      this.$router.push({
+        name: 'block'
+      })
+    },
+    navClick(data) {
+      if (data.url) {
+        this.$router.push({
+          name: 'block-aritical'
+        })
       }
+    }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -97,9 +113,9 @@ export default {
         background: #f5f6f8;
       }
       i {
-          position: absolute;
-          top: 8px;
-          right: 12px;
+        position: absolute;
+        top: 8px;
+        right: 12px;
       }
     }
     .nav {
