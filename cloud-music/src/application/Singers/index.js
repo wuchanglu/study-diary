@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Horizen from "../../baseUI/horizen-item";
 import Scroll from "../../baseUI/scroll";
 import Loading from "../../baseUI/loading";
@@ -20,17 +20,22 @@ import {
   refreshMoreHotSingerList,
 } from "./store/actionCreators";
 
+import { CHANGE_CATEGORY, CHANGE_ALPHA,CategoryDataContext } from "./data.js";
+
 function Singers(props) {
-  let [category, setCategory] = useState("");
-  let [alpha, setAlpha] = useState("");
+  const { data, dispatch } = useContext(CategoryDataContext);
+  // 拿到 category 和 alpha 的值
+  const { category, alpha } = data.toJS();
+  // let [category, setCategory] = useState("");
+  // let [alpha, setAlpha] = useState("");
   // 分类点击事件
   let handleUpdateCategory = (val) => {
-    setCategory(val);
+    dispatch({ type: CHANGE_CATEGORY, data: val });
     updateDispatch(val, alpha);
   };
   // 字母点击事件
   let handleUpdateAlpha = (val) => {
-    setAlpha(val);
+    dispatch({ type: CHANGE_ALPHA, data: val });
     updateDispatch(category, val);
   };
   const {

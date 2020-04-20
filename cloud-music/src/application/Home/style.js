@@ -17,7 +17,6 @@ export const Top = styled.div`
 `;
 export const Tab = styled.div`
   position: relative;
-  z-index: 5;
   height: 44px;
   display: flex;
   flex-direction: row;

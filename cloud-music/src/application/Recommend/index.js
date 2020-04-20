@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect } from "react";
+import { renderRoutes } from "react-router-config";
 import Slider from "../../components/slider/index.js";
 import RecommendList from "../../components/list/index.js";
 import { Content } from "./style";
@@ -36,6 +37,7 @@ const Recommend = forwardRef((props, ref) => {
         </div>
       </Scroll>
       {enterLoading ? <Loading></Loading> : ""}
+      {renderRoutes(props.route.routes)}
     </Content>
   );
 });

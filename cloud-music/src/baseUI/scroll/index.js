@@ -74,7 +74,6 @@ const Scroll = forwardRef((props, ref) => {
     setBScroll(scroll);
     // return 的函数会在组件被卸载是执行(清除操作)
     return () => {
-      console.log(11111);
       setBScroll(null);
     };
     // eslint-disable-next-line
