@@ -22,3 +22,13 @@ export const debounce = (func, delay) => {
     }, delay);
   };
 };
+// 处理歌手列表拼接歌手名字
+export const getName = list => {
+  let str = "";
+  list.map ((item, index) => {
+    str += index === 0 ? item.name : "/" + item.name;
+    return item;
+  });
+  return str;
+};
+export const isEmptyObject = obj => !obj || Object.keys (obj).length === 0;
