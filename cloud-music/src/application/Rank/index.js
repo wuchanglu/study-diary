@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import { renderRoutes } from "react-router-config";
 import { connect } from "react-redux";
 import { getRank } from "./store/actionCreators";
 import Scroll from "../../baseUI/scroll";
@@ -13,28 +14,44 @@ import {
 } from "./style";
 function Rank(props) {
   const { officialRank, globalRank, enterLoading } = props;
-
   const { getRankData } = props;
+  const { route } = props;
   useEffect(() => {
     getRankData();
     // eslint-disable-next-line
   }, []);
   const displayStyle = enterLoading ? { display: "none" } : { display: "" };
-  const pullDownHandle = () => {
+  const pullDownHandle = useCallback(() => {
     getRankData();
-  };
+    // eslint-disable-next-line
+  }, []);
+  const enterDetail = useCallback((detail) => {
+    props.history.push(`/rank/${detail.id}`);
+    // eslint-disable-next-line
+  }, []);
   return (
-    <Content>
-      <Scroll pullDown={pullDownHandle}>
-        <RankWrapper>
-          <h1 className="offcial">官方榜</h1>
-          <Offcial style={displayStyle} list={officialRank.toJS()}></Offcial>
-          <h1 className="global">官方榜</h1>
-          <Global style={displayStyle} list={globalRank.toJS()}></Global>
-        </RankWrapper>
-      </Scroll>
-      {enterLoading ? <Loading></Loading> : ""}
-    </Content>
+    <div>
+      <Content>
+        <Scroll pullDown={pullDownHandle}>
+          <RankWrapper>
+            <h1 className="offcial">官方榜</h1>
+            <Offcial
+              style={displayStyle}
+              list={officialRank.toJS()}
+              itemClick={enterDetail}
+            ></Offcial>
+            <h1 className="global">官方榜</h1>
+            <Global
+              style={displayStyle}
+              list={globalRank.toJS()}
+              itemClick={enterDetail}
+            ></Global>
+          </RankWrapper>
+        </Scroll>
+        {enterLoading ? <Loading></Loading> : ""}
+      </Content>
+      {renderRoutes(route.routes)}
+    </div>
   );
 }
 const mapStateToProps = (state) => {
@@ -53,11 +70,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 function Offcial(props) {
   const { list } = props;
+  const { itemClick } = props;
   return (
     <OffcialWrapper>
       {list.map((item) => {
         return (
-          <OffcialItem key={item.id}>
+          <OffcialItem key={item.id} onClick={() => itemClick(item)}>
             <div className="item-pic">
               <img alt="" src={item.coverImgUrl}></img>
               <div className="decorate"></div>
@@ -80,11 +98,13 @@ function Offcial(props) {
 }
 function Global(props) {
   const { list } = props;
+  const { itemClick } = props;
+
   return (
     <GlobalWrapper>
       {list.map((item) => {
         return (
-          <GlobalItem key={item.id}>
+          <GlobalItem key={item.id} onClick={() => itemClick(item)}>
             <div className="item-pic">
               <img alt="" src={item.coverImgUrl}></img>
               <div className="decorate"></div>
